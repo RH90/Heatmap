@@ -1,0 +1,54 @@
+plugins {
+    id "com.github.johnrengelman.shadow" version "5.2.0"
+    id "com.github.ben-manes.versions" version "0.27.0"
+    id 'jacoco'
+    id "org.beryx.runtime" version "1.8.0"
+}
+
+boolean openJFX = false
+
+apply plugin: 'idea'
+apply plugin: 'java'
+apply plugin: 'application'
+
+mainClassName = 'Heatmap.MainApp'
+
+def javaFxPath = "C:\\openjdk\\14\\jfx\\"
+
+repositories {
+    mavenLocal();
+    mavenCentral();
+    jcenter();
+    maven {
+        url "https://oss.sonatype.org/content/repositories/snapshots"
+    }
+    maven {
+        url "https://repo.boundlessgeo.com/main/"
+    }
+}
+
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+
+
+dependencies {
+    if (openJFX) {
+        compileOnly 'org.openjfx:javafx-controls:14:win'
+        compileOnly 'org.openjfx:javafx-graphics:14:win'
+        compileOnly 'org.openjfx:javafx-base:14:win'
+    }
+}
+
+application {
+    applicationDefaultJvmArgs = ["-XX:+UseG1GC", "-XX:SoftRefLRUPolicyMSPerMB=10", "-XX:MaxGCPauseMillis=1500", "-XX:MinHeapFreeRatio=5", "-XX:MaxHeapFreeRatio=5"]
+}
+
+compileJava.options.encoding = 'UTF-8'
+distTar.enabled = false
+distZip.enabled = false
+shadowDistTar.enabled = false
+shadowDistZip.enabled = false
