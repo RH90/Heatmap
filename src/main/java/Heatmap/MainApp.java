@@ -326,7 +326,8 @@ public class MainApp extends Application {
 
                 @Override
                 public void handle(MouseEvent t) {
-                    //    btnsa.setStyle("-fx-background-color:#dae7f3;");
+
+                    //    btnsa.setStyle("-fx-background-color:#dae7f3; ");
                     //if(!p.getId().contains("")){
                     label.setText(p.getId() + "%");
                     //}
