@@ -272,55 +272,8 @@ public class MainApp extends Application {
             p.setOnMouseClicked((new EventHandler<MouseEvent>() {
                 public void handle(MouseEvent event) {
                     double prec = getWifiLinux();
-//                    prec=100;
-                    //prec= new Random(System.nanoTime()).nextInt(101);
-                    p.setId(prec + "");
-//                    prec = (int) (prec * 5.10);
-//
-//                    int red = 255;
-//                    int green = 0;
-//
-//                    int inc=102;
-//                    for (int j = inc; j <= prec; j+=inc) {
-//                        if (green < 255) {
-//                            green+=inc;
-//                        } else {
-//                            red-=inc;
-//                        }
-//                    }
-//                    if(green>255)
-//                        green=255;
-//                    if(red<0)
-//                        red=0;
-                    int green=0,red=0;
-
-                    if(prec>=80){
-                        green=255;
-                        red=0;
-                    }else if(prec>=60){
-                        green=255;
-                        red=127;
-                    }else if(prec>=40){
-                        green=255;
-                        red=255;
-                    }else if(prec>=20){
-                        green=127;
-                        red=255;
-                    }else if(prec>=0){
-                        green=0;
-                        red=255;
-                    }
-
-
-
-                    System.out.println("Green:"+green+" Red:"+red+" Prec:"+prec);
-                    ///System.out.println("-fx-background-color:rgba(" + red + "," + green + ", 0, 0.5)");
-                    p.setStyle("-fx-background-color:rgba(" + red + "," + green + ", 0, 1);" + borderStyle);
-
-
+                    setColor(prec, p);
                 }
-
-
             }));
             p.setOnMouseEntered(new EventHandler<MouseEvent>() {
 
@@ -343,39 +296,14 @@ public class MainApp extends Application {
         Pane p = new Pane();
         p.setMinSize(boxSize, boxSize);
         if (prec != -1) {
-            p.setId(prec + "");
-            prec = (int) (prec * 5.10);
-            int red = 255;
-            int green = 0;
-            for (int j = 0; j <= prec; j++) {
-                if (green != 255) {
-                    green++;
-                } else {
-                    red--;
-                }
-            }
-            p.setStyle("-fx-background-color:rgba(" + red + "," + green + ", 0, 1);" + borderStyle);
+            setColor(prec, p);
         } else {
             p.setStyle(borderStyle);
         }
-
         p.setOnMouseClicked((new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 double prec = getWifiLinux();
-                p.setId(prec + "");
-                prec = (int) (prec * 5.10);
-
-                int red = 255;
-                int green = 0;
-
-                for (int j = 0; j <= prec; j++) {
-                    if (green != 255) {
-                        green++;
-                    } else {
-                        red--;
-                    }
-                }
-                p.setStyle("-fx-background-color:rgba(" + red + "," + green + ", 0, 1);" + borderStyle);
+                setColor(prec, p);
             }
         }));
         p.setOnMouseEntered(new EventHandler<MouseEvent>() {
@@ -386,6 +314,28 @@ public class MainApp extends Application {
         });
         tp.getChildren().add(p);
 
+    }
+
+    private void setColor(double prec, Pane p) {
+        p.setId(prec + "");
+        int green=0,red=0;
+        if(prec >=80){
+            green=255;
+            red=0;
+        }else if(prec >=60){
+            green=255;
+            red=127;
+        }else if(prec >=40){
+            green=255;
+            red=255;
+        }else if(prec >=20){
+            green=127;
+            red=255;
+        }else if(prec >=0){
+            green=0;
+            red=255;
+        }
+        p.setStyle("-fx-background-color:rgba(" + red + "," + green + ", 0, 1);" + borderStyle);
     }
 
     private int getWifi() {

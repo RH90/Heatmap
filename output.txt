@@ -136,7 +136,6 @@ null
 null
 null
 null
-75.0
 null
 null
 null
@@ -162,7 +161,6 @@ null
 null
 null
 null
-67.0
 null
 null
 null
@@ -207,7 +205,9 @@ null
 null
 null
 null
-75.0
+null
+null
+null
 null
 null
 null
